@@ -1,0 +1,397 @@
+
+% a4paper - A4纸  11pt -字体 twoside -双面 openany -新章节可在偶数页开始
+\documentclass[a4paper,11pt,twoside,openany]{article}
+%------------------------------纸张大小----------------------------------
+% 定义转换成pdf文档的纸张大小，应与\paperwidth \paperheight一致
+%\special{pdf: pagesize width 20cm height 30cm}
+% true的含义是保持尺寸不会随一些参数的变化而变化，具体可见Knuth的TeXbook
+%\paperwidth 20 true cm                  % 纸张宽
+%\paperheight 30 true cm                 % 纸张高
+%------------------------------页面布局----------------------------------
+%\textwidth 10 true cm                   % 正文宽
+%\textheight 20 true cm                  % 正文高
+%\headheight  14pt                       % 页眉高
+%\headsep    16pt                        % 页眉距离
+%\footskip   27pt                        % 页脚距离
+%\marginparsep 10pt                      % 边注区距离
+%\marginparwidth  100pt                  % 边注区宽
+%----------------------------页边空白调整-------------------------------
+\def\marginset#1#2{                      % 页边设置 \marginset{left}{top}
+\setlength{\oddsidemargin}{#1}         % 左边（书内侧）装订预留空白距离
+\iffalse                   % 如果考虑左侧（书内侧）的边注区则改为\iftrue
+\reversemarginpar
+\addtolength{\oddsidemargin}{\marginparsep}
+\addtolength{\oddsidemargin}{\marginparwidth}
+\fi
+
+  \setlength{\evensidemargin}{0mm}       % 置0
+\iffalse                   % 如果考虑右侧（书外侧）的边注区则改为\iftrue
+\addtolength{\evensidemargin}{\marginparsep}
+\addtolength{\evensidemargin}{\marginparwidth}
+\fi
+
+  % \paperwidth = h + \oddsidemargin+\textwidth+\evensidemargin + h
+\setlength{\hoffset}{\paperwidth}
+\addtolength{\hoffset}{-\oddsidemargin}
+\addtolength{\hoffset}{-\textwidth}
+\addtolength{\hoffset}{-\evensidemargin}
+\setlength{\hoffset}{0.5\hoffset}
+\addtolength{\hoffset}{-1in}           % h = \hoffset + 1in
+
+  \setlength{\voffset}{-1in}             % 0 = \voffset + 1in
+\setlength{\topmargin}{\paperheight}
+\addtolength{\topmargin}{-\headheight}
+\addtolength{\topmargin}{-\headsep}
+\addtolength{\topmargin}{-\textheight}
+\addtolength{\topmargin}{-\footskip}
+\addtolength{\topmargin}{#2}           % 上边预留装订空白距离
+\setlength{\topmargin}{0.5\topmargin}
+}
+% 调整页边空白使内容居中，两参数分别为纸的左边和上边预留装订空白距离
+\marginset{10mm}{12mm}
+%-----------------------------字体支持-----------------------------------
+\usepackage{times}                       % 使用 Times New Roman 字体
+\usepackage{CJK,CJKnumb,CJKulem}         % 中文支持宏包
+%\usepackage{ccmap}                      % 使pdfLatex生成的文件支持复制等
+%\usepackage[mtbold,mtpluscal,mtplusscr]{mathtime}%数学环境用Times New Roman
+%-----------------------------页眉页脚-----------------------------------
+\usepackage{fancyhdr}                    % 页眉页脚相关宏包
+\pagestyle{fancy}                        % 页眉页脚风格
+%-----------------------------段落字体格式-------------------------------
+\usepackage{color}                       % 支持彩色
+\usepackage{indentfirst}                 % 首行缩进宏包
+%\setlength{\parindent}{2em}             % 段落缩进
+\setlength{\parskip}{0.7ex plus0.3ex minus0.3ex} % 段落间距
+%\linespread{1.2}                        % 行距倍数
+\renewcommand{\baselinestretch}{1.2}     % 行距倍数（同上）
+%\renewcommand{\CJKglue}{\hskip 0pt plus 0.08\baselineskip} % 汉字字距
+%\newcommand{\aaa}{这是测试}             % 自定义文字块例子
+\newcommand{\song}{\CJKfamily{song}}     % 宋体
+\newcommand{\hei}{\CJKfamily{hei}}       % 黑体
+\newcommand{\fs}{\CJKfamily{fs}}         % 仿宋
+\newcommand{\kai}{\CJKfamily{kai}}       % 楷体
+\newcommand{\li}{\CJKfamily{li}}         % 隶书
+\newcommand{\you}{\CJKfamily{you}}       % 幼圆
+\newcommand{\wuhao}{\fontsize{10.5pt}{12.6pt}\selectfont}      % 五号字体
+\newcommand{\xiaosi}{\fontsize{12pt}{14pt}\selectfont}         % 小四字体
+\newcommand{\sihao}{\fontsize{14pt}{\baselineskip}\selectfont} % 四号字体
+%\marginparpush                          %
+%-----------------------------超链接和标签-------------------------------
+\iffalse % 将这里改为\iftrue即可使用
+\ifx\pdfoutput\undefined % Not run pdftex
+%  \ifx
+%    \usepackage[dvips]{hyperref}
+%  \else
+\usepackage[dvipdfm]{hyperref}
+%  \fi
+\AtBeginDvi{\special{pdf:tounicode GBK-EUC-UCS2}} % GBK -> Unicode
+\else
+\usepackage[pdftex]{hyperref}
+\fi
+\hypersetup{CJKbookmarks,%
+bookmarksnumbered,%
+colorlinks,%
+linkcolor=blue,%
+citecolor=blue,%
+hyperindex,%
+plainpages=false,%
+pdfstartview=FitH}
+\fi
+%--------------------------------注释------------------------------------
+\iffalse % 将这里改为\iftrue即可使用
+%注释掉一段内容
+\usepackage{verbatim}
+\begin{comment}
+This is a comment example.
+\end{comment}
+\fi
+%\makeatletter % @ is now a normal "letter" for Tex
+%\makeatother  % @ is restored as a "non-letter" for Tex
+%--------------------------------其他宏包--------------------------------
+\usepackage{amsmath,amsthm,amsfonts,amssymb,bm} % 数学宏包
+\usepackage{graphicx,psfrag}                    % 图形宏包
+\usepackage{animate}                            % 动态显示图片
+\usepackage{url}                                 %显示网址链接
+\usepackage{multirow}                            %表格显示多行
+\usepackage{rotating}
+%\usepackage{makeidx}                            % 建立索引宏包
+%\usepackage{listings}                           % 源代码宏包
+%---------------------------------正文-----------------------------------
+\begin{document} % 开始正文
+% song-宋体 hei-黑体 fs-仿宋 kai-楷体 li-隶书 you-幼圆 com为 song+hei
+\begin{CJK*}{GBK}{com}                           % 开始中文环境
+\CJKtilde                                        % 重定义~代表的空白距离
+\CJKindent                                       % 段首缩进
+\CJKcaption{GB}                                  % 中文章节标题
+%\author{zhengrui}                                     % 作者
+\title{仪表校正}                            % 题目
+\maketitle                                       % 生成标题
+%\thispagestyle{empty}                           % 设置首页的页眉页脚风格
+%\setlength{\baselineskip}{3ex plus1ex minus1ex} % 调整行距
+\iffalse
+\TeX{}~是由图灵奖得主\index{Knuth, Donald E.}~Donald E. Knuth\cite{texbook}~
+编写的计算机程序，用于文章和数学公式的排版。
+
+1977~年~Knuth~开始编写~\TeX{}~排版系统引擎的时候，\\ % 换行
+是为了探索当时正开始进入出版工业的数字印刷设备的潜力。 \newline % 换行
+他特别希望能因此扭转那种排版质量下降的趋势，使自己写的书和文章免受其害。
+
+\noindent % 不缩进
+% 下面是特殊字符 # $ % ^ & _ { } ~ \  ... 的输入
+\# \$ \% \^{} \& \_ \{ \} \~{} $\backslash$ \ldots
+
+\indent   % 恢复缩进
+%不用CJKulem包时，\textit{我a} 或 \emph{我a} 或 {\em 我a}使英文斜体、中文变字体
+% 用CJKulem包后，\textit{我a} 依然是英文斜体、中文变字体，后两者变为加下划线
+\textit{中文textit} \emph{中文emph} {\em 中文em}
+\textbf{粗体textbf} % 粗体，对于中文推荐用黑体字代替粗体
+\uline{下划线uline} % 下划线（需要CJKulem包）
+\textcolor{yellow}{黄yellow} % 颜色（需要color包）
+{\color{blue}蓝blue} {\color{red}红red} {\color{green}绿green}
+{\hei 黑体}{\sihao 四号} {\song\xiaosi 宋体小四} % 字体大小
+{\tiny hi} {\small hi} {\normalsize hi} {\large hi} {\Large hi} {\huge hi}
+
+\clearpage % 换页，\newpage也可以，推荐\clearpage
+我们现在使用的~\TeX{}~系统是在~1982~年发布的，1989~年又略作改进，增进了
+对~8~字节字符和多语言的支持。\TeX{}~以具有优异的稳定性，可以在各种不同
+类型的计算机上运行，以及几乎没有错误而著称。\TeX{}~的版本号不断趋近于~$\pi$，
+现在为$3.14159$。
+\fi
+
+依赖于一组独立自变量$x_i$的量$Q=f(x_{1},x_{2},...,x_{N})$的不确定度与每个自变量$x_i$的不确定度之间的关系：
+\begin{equation}
+\frac{\delta Q}{Q}=\frac{x_{1}}{Q}\frac{\partial Q}{\partial x_{1}}(\frac{\delta x_{1}}{x_{1}})+\frac{x_{2}}{Q}\frac{\partial Q}{\partial x_{2}}(\frac{\delta x_{2}}{x_{2}})+......+\frac{x_{N}}{Q}\frac{\partial Q}{\partial x_{N}}(\frac{\partial x_{N}}{x_{N}})
+\end{equation}
+\begin{eqnarray}
+%\begin{split}
+(\frac{\delta Q}{Q})^{2}&=[(\frac{x_{1}}{Q}\frac{\partial Q}{\partial x_{1}})^{2}(\frac{\delta x_{1}}{x_{1}})^{2}+(\frac{x_{2}}{Q}\frac{\partial Q}{\partial x_{2}})^{2}(\frac{\delta x_{2}}{x_{2}})^{2}+...+(\frac{x_{N}}{Q}\frac{\partial Q}{\partial x_{N}})^{2}(\frac{\delta x_{N}}{x_{N}})^{2}]+\nonumber\\
+&\sum_{i,j,i\neq j}^{N}\frac{x_{i}}{Q}\frac{\partial Q}{\partial x_{i}}(\frac{\delta x_{i}}{x_{i}})\times\frac{x_{j}}{Q}\frac{\partial Q}{\partial x_{j}}(\frac{\delta x_{j}}{xj})
+%\end{split}
+\end{eqnarray}
+因为$x_i$之间是独立independent的，所以$\delta x_i \delta x_j =0$，于是有
+\begin{equation}
+\frac{\delta Q}{Q}=[(\frac{x_{1}}{Q}\frac{\partial Q}{\partial x_{1}})^{2}(\frac{\delta x_{1}}{x_{1}})^{2}+(\frac{x_{2}}{Q}\frac{\partial Q}{\partial x_{2}})^{2}(\frac{\delta x_{2}}{x_{2}})^{2}+...+(\frac{x_{N}}{Q}\frac{\partial Q}{\partial x_{N}})^{2}(\frac{\delta x_{N}}{x_{N}})^{2}]^{\frac{1}{2}}
+\label{eq.3}
+\end{equation}
+\begin{equation}
+\frac{\delta Q}{Q}=[(S_{x_{1}})^{2}(U_{x_{1}})^{2}+(S_{x_{2}})^{2}(U_{x_{2}})^{2}+...+(S_{x_{N}})^{2}(U_{x_{N}})^{2}]^{\frac{1}{2}}
+\label{eq.4}
+\end{equation}
+\begin{equation}
+S_{x_{i}}=\frac{x_{i}}{Q}\frac{\partial Q}{\partial x_{i}}
+\label{eq.5}
+\end{equation}
+\begin{equation}
+U_{x_{i}}=\frac{\delta x_{i}}{x_{i}}
+\label{eq.6}
+\end{equation}
+其中$S_{x_i}$成为变量$x_i$的灵敏度系数，$U_{x_i}$是$x_i$的不确定度。
+
+各种仪表：\\
+基于压力差的流量计表有：\\
+
+Orifice, venturi, nozzle flowmeters: 体积流速为
+\begin{equation}
+Q=C_{d}E_{u}Y(\frac{\pi}{4}d^{2})\sqrt{\frac{2\Delta p}{\rho_{1}}}
+\end{equation}
+其中$\Delta p=p_1-p_2$，$\rho_1$、$p_1$为upstream的密度、压力，$p_2$为downstream的压力，$C_d$为discharge coefficient(与粘滞和涡流带来的损耗有关)，$E_u$是velocity approach factor，$E_u=1/\sqrt{1-\beta^2}$，$\beta=d/D$，$Y$称为扩散因子(考虑到气体压缩性质)，对于不可压缩的物质，其值为1，对于气体，
+\begin{equation}
+Y=\sqrt{(P_{2}/P_{1})^{2/k}(\frac{k}{k-1})(\frac{1-(P_{2}/P_{1})^{\frac{k-1}{k}}}{1-P_{2}/P_{1}})(\frac{1-\beta^{4}}{1-\beta^{4}(P_{2}/P_{1})^{2/k}})}
+\label{eq.Y}
+\end{equation}
+其中$k$是比热因子$C_p/C_v$，当$\beta$小于0.25时，$\beta^4$接近于0。
+
+Wedge flowmeter: 只用来测液体，此时可以用上面的流速公式，$Y$视为1，不过$\beta$的计算有点不同：
+\begin{equation}
+\beta=\frac{1}{\pi^{2}}[cos^{-1}(1-2\frac{H}{D})-2(1-2\frac{H}{D})\{\frac{H}{D}-(\frac{H}{D})^{2}\}^{1/2}]
+\end{equation}
+
+Pitot tube flowmeter: 体积流速为
+\begin{equation}
+Q=K(\frac{\pi}{4}D^{2})\sqrt{\frac{2\Delta p}{\rho}}
+\end{equation}
+其中$\Delta P=P_t-P_s$，$P_t$为total stagnation压力，$P_s$为static pressure，$K$为仪器的经验系数。
+
+通过其他物理原理来测体积流速的表还有：\\
+vortex flowmeter: 体积流速为：
+\begin{equation}
+Q=\frac{f\pi D^{2}w}{4S}(1-\frac{4Kw}{\pi D})
+\end{equation}
+其中$S=fw/u$，$S$称为Strouhal数，$f$为vortex shedding frequency，在Reynolds数为$10^2-10^7$这样一个很大的范围内，$S$基本是一个常数，值依赖于$w/D$，当$w/D=0.1$时，$S=0.18$，当$w/D=0.3$时，$S=0.26$，当$w/D=0.5$时，$S=0.44$。
+
+Turbine flowmeter: 体积流速为：
+\begin{equation}
+Q=(\frac{\pi}{4}D^{2})\frac{Krw}{\mathrm{tan}\theta}
+\end{equation}
+其中$u=\frac{Krw}{\mathrm{tan}\theta}$是upstream的流速，$K$是仪器对因涡轮造成的流体减速的补偿因子，$w$为涡轮角速度，$r=\sqrt{\frac{r_o^2+r_i^2}{2}}$，$r_o$和$r_i$分别为刀片的外半径和内半径。
+$\theta$为管轴与涡轮刀片面的夹角。
+
+Ultrasonic flowmeter: 体积流速为：
+\begin{equation}
+Q=(\frac{\pi}{4}D^{2})\frac{KD}{\mathrm{sin}2\theta}t_{f}
+\end{equation}
+其中$t_f=(t_U-t_D)/(t_Ut_D)$是一个关于与流体近似同向的接受时间$t_D$和与流体近似逆向的接收时间$t_U$的函数，$K$是仪器经验参数。
+
+Magnetic flowmeter: 体积流速为：
+\begin{equation}
+Q=(\frac{\pi}{4}D^{2})\frac{KE}{BL}
+\end{equation}
+$E$是通电流体在磁场下产生的感应电势差，原理等同于霍尔效应，$K$为仪器经验参数，$L$为两电极间的距离，通常等于管径$D$。
+
+直接测量质量流速的流量计Mass flowmeter通常利用科里奥利力(coriolis force)，其测得的质量流速为：
+\begin{equation}
+Q=\frac{K_{u}\tau(1-(\frac{w}{w_{u}})^{2})}{2KL^{2}}
+\end{equation}
+其中$K$是与管子形状有关的一个经验参数，$K_u$为管子的刚度，$w_u$是管子的自然共振频率，$w$是实际的振动频率，$\tau$是科里奥利力引起的相差带来的时间滞后。
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{flowmeters.png}\\
+  \caption{各种体积流量计}\label{flowmeters}
+\end{figure}
+
+\begin{figure}
+\centering
+\animategraphics[width=0.4\textwidth,
+controls,buttonsize=1em,buttonfg=0.5,
+loop]{10}{IMG000}{00}{29}
+\caption{Coriolis质量流量计}\label{coriolis}
+\end{figure}
+
+\textcolor{red}{流速补偿公式推导}：\\
+对于orifice，venturi，nozzle，wedge，pitot这几种通过测量压力差来得到流速数据$Q_m$的表，
+\begin{eqnarray}
+Q_{corr}\sqrt{\rho_{m}}=Q_{m}\sqrt{\rho_{D}}\\
+Q_{corr}=Q_{m}\sqrt{\rho_{D}/\rho_{m}}
+\end{eqnarray}
+如果读取的是质量流速数据$\overset{\cdot}{m}=Q\cdot\rho$，则有
+\begin{equation}
+\overset{\cdot}{m}_{corr}/\sqrt{\rho_{m}}=\overset{\cdot}{m}_{m}/\sqrt{\rho_{D}}\\
+\overset{\cdot}{m}_{corr}=\overset{\cdot}{m}_{m}\sqrt{\rho_{m}/\rho_{D}}
+\end{equation}
+如果读取到的是转换到某个标准条件下之后的(比如一定温度$T_{D\_std}$、压力$P_{D\_std}$、还有
+某种标准液体密度$\rho_{D\_std}$)体积流速数据$Q_{std\_m}$(注意在设计的时候也不一定是在这种标准条件下，
+所以还有$\rho_D$，但$\rho_{D\_std}$和$\rho_D$是针对同一种初始设计液体的)，则：\\
+首先由当前条件转换到标准条件下体积流速的公式会变为：\\
+\begin{equation}
+Q_{std}=Q\cdot\frac{\rho_{1}}{\rho_{1\_std}}\propto\frac{\sqrt{\rho_{1}}}{\rho_{1\_std}}
+\end{equation}
+可以得到转换到标准条件下之后的体积流速的补偿关系为：\\
+\begin{equation}
+Q_{std\_corr}=Q_{std\_m}\sqrt{\frac{\rho_{m}}{\rho_{D}}}\cdot\frac{\rho_{D\_std}}{\rho_{m\_std}}
+\label{eq20}
+\end{equation}
+上面$\rho_m$与$\rho_{m\_std}$也是针对同一种被测的实际液体的。
+对于理想气体和实际气体分别有$PV=nRT$和$PV=nZRT$，其中$Z$为压缩因子(compressibility factor)，将后式改写成:\\
+\begin{eqnarray}
+V_{mol}=ZRT/P \\
+\rho=M_{mol}/V_{mol}=PM_{mol}/ZRT
+\end{eqnarray}
+代入到前面三种针对液体的补偿关系式中，可以得到：\\
+对于体积流速\\
+\begin{equation}
+Q_{corr}=Q_{m}\sqrt{\frac{M_{mol\_D}P_{D}/Z_{D}T_{D}}{M_{mol\_m}P_{m}/Z_{m}T_{m}}}
+\end{equation}
+对于转换到标准条件下之后的体积流速\\
+\begin{eqnarray}
+Q_{std}=Q\cdot\frac{\rho_{1}}{\rho_{1\_std}}=Q\cdot\frac{P_{1}/Z_{1}T_{1}}{P_{1\_std}/Z_{1\_std}T_{1\_std}}\nonumber\\
+\propto\frac{1}{\sqrt{P_{1}M_{mol\_1}/Z_{1}T_{1}}}\cdot\frac{P_{1}/Z_{1}T_{1}}{P_{1\_std}/Z_{1\_std}T_{1\_std}}\propto\frac{\sqrt{P_{1}/Z_{1}T_{1}M_{mol\_1}}}{P_{1\_std}/Z_{1\_std}T_{1\_std}}\\
+Q_{std\_corr}=Q_{std\_m}\sqrt{\frac{P_{m}/M_{mol\_m}Z_{m}T_{m}}{P_{D}/M_{mol\_D}Z_{D}T_{D}}}=Q_{std\_m}\sqrt{\frac{M_{mol\_D}Z_{D}T_{D}/P_{D}}{M_{mol\_m}Z_{m}T_{m}/P_{m}}}
+\end{eqnarray}
+上式中用到了对于任意气体，在不同条件下同一气体摩尔质量始终相同的，
+不同气体在标准条件下$P_{1\_std}$，$T_{1\_std}$，和$Z_{1\_std}$都是一样的(\textcolor{blue}{$Z_{1\_std}$好像不一定一样啊？如果认为不一样，则后面补偿系数表[\ref{tab1}]($gas, standard, m^3/h$)一行应该都乘以$\frac{Z_{m\_std}}{Z_{D\_std}}$})。\\
+对于质量流速补偿就很好求了\\
+\begin{equation}
+\overset{\cdot}{m}_{corr}=\overset{\cdot}{m}_{m}\sqrt{\frac{M_{mol\_m}P_{m}/Z_{m}T_{m}}{M_{mol\_D}P_{D}/Z_{D}T_{D}}}
+\end{equation}
+上面对气体情况的补偿过程中还有一个问题是文献中没有考虑到的，就是\textcolor{blue}{$Y$的变化}，如果考虑$Y$在不同条件下的变化，则需要对每个补偿进行一定的修正，参考\url{http://en.wikipedia.org/wiki/Orifice_plate}\\
+对于vortex，turbine，ultrasonic和magnetic flowmeter，以及coriolis mass flowmeter，因为仪器原理不同，补偿公式都比较简单，列举出来如表[\ref{tab1}]所示。
+\begin{sidewaystable}[h]
+\renewcommand\arraystretch{2}
+\begin{tabular}{cccc}
+\hline
+\multirow{2}{*}{Phase\textbackslash{}Type of flowmeters} & Differential pressure meters & Volumetic flowmeters & Mass flowmeters\tabularnewline
+ & orifice, venturi, nozzle, wedge, pitot  & vortex, turbine, ultrasonic, magnetic  & coriolis\tabularnewline
+\hline
+liquid, actually, $m^{3}/h$ & $\sqrt{\frac{\rho_{D}}{\rho_{m}}}$ & $1$ & $\frac{\rho_{D}}{\rho_{m}}$\tabularnewline
+\hline
+liquid, standard, $m^{3}/h$ & $\sqrt{\frac{\rho_{m}}{\rho_{D}}}\cdot\frac{\rho_{D\_std}}{\rho_{m\_std}}$ & $\frac{\rho_{m}}{\rho_{D}}\cdot\frac{\rho_{D\_std}}{\rho_{m\_std}}$ & $\frac{\rho_{D\_std}}{\rho_{m\_std}}$\tabularnewline
+\hline
+liquid, actually, $kg/h$ & $\sqrt{\frac{\rho_{m}}{\rho_{D}}}$ & $\frac{\rho_{m}}{\rho_{D}}$ & $1$\tabularnewline
+\hline
+gas, actually, $m^{3}/h$ & $\sqrt{\frac{M_{mol\_D}P_{D}/Z_{D}T_{D}}{M_{mol\_m}P_{m}/Z_{m}T_{m}}}$ & $1$ & $\frac{M_{mol\_D}P_{D}/Z_{D}T_{D}}{M_{mol\_m}P_{m}/Z_{m}T_{m}}$\tabularnewline
+\hline
+gas, standard, $m^{3}/h$ & $\sqrt{\frac{M_{mol\_D}Z_{D}T_{D}/P_{D}}{M_{mol\_m}Z_{m}T_{m}/P_{m}}}$ & $\frac{Z_{D}T_{D}/P_{D}}{Z_{m}T_{m}/P_{m}}$ & $\frac{M_{mol\_D}}{M_{mol\_m}}$\tabularnewline
+\hline
+gas, actually, $kg/h$ & $\sqrt{\frac{M_{mol\_m}P_{m}/Z_{m}T_{m}}{M_{mol\_D}P_{D}/Z_{D}T_{D}}}$ & $\frac{M_{mol\_m}P_{m}/Z_{m}T_{m}}{M_{mol\_D}P_{D}/Z_{D}T_{D}}$ & $1$\tabularnewline
+\hline
+\end{tabular}
+\caption{不同仪表补偿系数}
+\label{tab1}
+\end{sidewaystable}
+
+\textcolor{red}{不确定度计算}：
+利用不同仪表补偿系数表(表[\ref{tab1}])，以及不确定公式(\ref{eq.3}-\ref{eq.6})，可以得到各种表的的不确定
+计算方式如下：\\
+对orifice,venturi,nozzle,wedge flowmeters，
+\begin{eqnarray}
+\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta C_{d}}{C_{d}})^{2}+(\frac{2}{1-\beta^{4}})^{2}(\frac{\delta d}{d})^{2}+
+(\frac{-2\beta}{1-\beta^{4}})^{2}(\frac{\delta D}{D})^{2}+\nonumber\\
+(\frac{1}{2})^{2}(\frac{\delta\Delta P}{\Delta P})^{2}+(\frac{1}{2})^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}
+\label{eq27}
+\end{eqnarray}
+对vortex flowmeter，
+\begin{eqnarray}
+\frac{\delta Q_{std}}{Q_{std}}=[(-1)^{2}(\frac{\delta S}{S})^{2}+(\frac{1-2\frac{4Kw}{\pi D}}{1-\frac{4Kw}{\pi D}})^{2}(\frac{\delta w}{w})^{2}+(\frac{2-\frac{4Kw}{\pi D}}{1-\frac{4Kw}{\pi D}})^{2}(\frac{\delta D}{D})^{2}+\nonumber\\
+(-\frac{\frac{4Kw}{\pi D}}{1-\frac{4Kw}{\pi D}})^{2}(\frac{\delta K}{K})^{2}+(1)^{2}(\frac{\delta f}{f})^{2}+(1)^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}
+\end{eqnarray}
+对turbine flowmeter，
+\begin{eqnarray}
+\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta K}{K})^{2}+(1)^{2}(\frac{\delta w}{w})^{2}+(\frac{r_{o}}{2r^{2}})^{2}(\frac{\delta r_{o}}{r_{o}})^{2}+(\frac{r_{i}}{2r^{2}})^{2}(\frac{\delta r_{i}}{r_{i}})^{2}+\nonumber\\
+(-\frac{\theta\mathrm{sec^{2}\theta}}{\mathrm{tan}\theta})^{2}(\frac{\delta\theta}{\theta})^{2}+(2)^{2}(\frac{\delta D}{D})^{2}+(1)^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}
+\end{eqnarray}
+对ultrasonic flowmeter，
+\begin{eqnarray}
+\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta K}{K})^{2}+(1)^{2}(\frac{\delta t_{f}}{t_{f}})^{2}+(\frac{-2\theta}{\mathrm{tan}2\theta})^{2}(\frac{\delta\theta}{\theta})^{2}+\nonumber\\
+(3)^{2}(\frac{\delta D}{D})^{2}+(1)^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}
+\end{eqnarray}
+对coriolis mass flowmeter，体积流速的不确定度，
+\begin{eqnarray}
+\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta K_{u}}{K_{u}})^{2}+(-1)^{2}(\frac{\delta K}{K})^{2}+(-\frac{2w^{2}}{w_{u}^{2}-w^{2}})^{2}(\frac{\delta w}{w})^{2}+\nonumber\\
+(\frac{2w^{2}}{w_{u}^{2}-w^{2}})(\frac{\delta w_{u}}{w_{u}})^{2}+(1)^{2}(\frac{\delta\tau}{\tau})^{2}+(-2)^{2}(\frac{\delta L}{L})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}
+\end{eqnarray}
+上面这些不确定度都是针对流体由工厂实际条件转换到标准条件下之后的不确定计算公式，如果想计算气体，
+或者不转换到标准条件下而是在工厂实际条件下的不确定度，可以利用一个简单规则，如果$f\propto x_{i}^{a}$，那么$x_i$这个变量的灵敏度系数即为$\frac{x_{i}}{f}\frac{\partial f}{\partial x_{i}}=a$，以及在工厂条件与标准条件下体积流速的转换关系$Q_{std}=Q\cdot\frac{\rho_{1}}{\rho_{1\_std}}$，
+和补偿系数表，就可以计算各种情况下的不确定度(实际上对补偿系数表中每项，提取出包含$D$，$D_{std}$，$mol\_D$的部分
+取倒数就得到这种情况下的流速与相关变量之间的幂函数正比关系，再利用上面的简单规则，就可以很容易由液体标准条件下
+不确定度公式写出其他情况下的不确定度公式)。
+
+\textcolor{red}{例子}：\\
+文献中的一个测液体体积流速的例子：\\
+已知参数：设计密度$\rho_D=750kg/m^3$，设计时的流体样本在标准条件下的密度$\rho_{D\_{std}}=950kg/m^3$，
+工厂实测密度$\rho_m=740kg/m^3$，工厂实际流体在标准条件下的密度$\rho_{m\_{std}}=960kg/m^3$，现在流速表给出
+的是转换到标准条件下滞后的体积流速$Q_{{std}\_m}=600std.m^3/d$，代入式(\ref{eq20})可以得到转换到标准条件下
+之后的补偿值为$Q_{std\_corr}=600\times\sqrt{\frac{740}{750}}\times\frac{950}{960}=589.8std.m^{3}/d\sim590std.m^{3}/d$，
+不确定计算则利用式(\ref{eq27})，其中灵敏度系数包含一些与仪表设计参数有关的量(如$\beta$)可以由说明书得到，
+而每个变量在某个置信度下的不确定度值是由不同标准(AGA，API，ASME，ASTM)或着仪表说明给出的，在AGA标准下各变量在$\mathrm{U}_{95}$
+置信级别上的不确定度如图(\ref{uncertainty})所示(假设$\beta=0.6$)，可以得到$\mathrm{U}_{95}$置信级别下的转换到标准条件之后的体积流速不确定度为$\pm0.76\%$，
+而算工厂实际条件下的质量流速不确定度时就不需要式(\ref{eq27})中最后一项，可以算得其不确定度为$\pm0.58\%$。\\
+\begin{figure}
+  \includegraphics[width=\textwidth]{orificeuncertainty.png}
+  \caption{变量不确定度}
+  \label{uncertainty}
+\end{figure}
+对于气体流速的补偿情况，由补偿系数表可以看到与$M_{mol}$，$T$，$P$，$Z$有关系，前三个量都是容易知道的，\textcolor{red}{但设计条件下与工厂实际条件下气体(特别是混合气体)的压缩因子$Z$怎么得到？}
+
+\textcolor{blue}{基本步骤}：\\
+1，根据仪表类型、要补偿的物理量以及在什么条件下进行补偿，由补偿系数表选择合适的补偿系数。\\
+2，对于液体需要知道设计时的密度，工厂实际条件下的密度，如果是要补偿转换到标准条件下之后的流速值，
+还需要知道设计时的流体样本在标准条件下的密度以及工厂实际流体在标准条件下的密度；对于气体，在不考虑$Y$的变化情况下，需要知道设计时的温度，压力，摩尔质量，压缩因子，工厂
+实际条件下的温度，压力，摩尔质量，压缩因子。压缩因子怎么得到？\\
+3，根据仪表类型，要得到什么条件下什么量的不确定度选择合适的不确定度计算公式，再根据所选置信级别，仪器实际参数和说明，以及选定那种国际标准来确定灵敏度系数以及每个量的不确定度，
+根据前面所选公式进而算出所要求的不确定度。\\
+4，对每个仪表都进行补偿并得到不确定度之后，对补偿后的整个网络再进行校正，比较校正与补偿之间的差别并根据前面得到的不确定度判断是否存在系统误差。
+
+\clearpage
+\end{CJK*}     % 结束中文环境
+\end{document} % 结束正文

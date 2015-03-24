@@ -1,0 +1,924 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset Formula $y=\mathbf{x}+\varepsilon$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $min_{x}(\mathbf{{(y-x)^{T}W(y-x)}})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{\hat{x}=y-W^{-1}A^{T}(AW^{-1}A^{T})^{-1}Ay}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\Sigma=\mathrm{E}(\mathbf{yy^{T}})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $max_{x}\frac{1}{(2\pi)^{n/2}|\Sigma|^{n/2}}exp\{-0.5\mathbf{(y-x)^{T}\Sigma^{-1}(y-x)}\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $min_{x}\mathbf{(y-x)^{T}\Sigma^{-1}(y-x)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $min_{x}\sum_{i=1}^{n}(y_{i}-x_{i})^{2}/\sigma_{i}^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{W\longleftrightarrow\Sigma^{-1}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{\hat{x}=y-\Sigma A^{T}(A\Sigma A^{T})^{-1}Ay=[I-\Sigma A^{T}(A\Sigma A^{T})^{-1}A]y=By}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathrm{E}[\mathbf{\hat{x}}]=\mathbf{B}\mathrm{E}[\mathbf{y}]=\mathbf{By=x}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathrm{Cov[\mathbf{\hat{x}}]=E[\mathbf{(By)(By)^{T}}]}=\mathbf{B\Sigma B^{T}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $m\times n$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{\hat{x}=y-\Sigma(PA_{x})^{T}[(PA_{x})\Sigma(PA_{x})^{T}]^{-1}(PA_{x})y}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{\hat{u}=-A_{u}^{-1}A_{x}\hat{x}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{A_{u}=QR\Pi_{u}=[\begin{array}{cc}
+Q_{1} & Q_{2}\end{array}][\begin{array}{c}
+R_{1}\\
+0
+\end{array}]\Pi_{u}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{Q^{T}Q=I}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{Q_{2}^{T}A_{u}=Q_{2}^{T}[\begin{array}{cc}
+\mathbf{Q_{1}} & Q_{2}\end{array}][\begin{array}{c}
+R_{1}\\
+0
+\end{array}]\Pi_{u}=[\begin{array}{cc}
+0 & I\end{array}][\begin{array}{c}
+R_{1}\\
+0
+\end{array}]\Pi_{u}=0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{\Pi_{u}u=-R_{1}^{-1}Q_{1}^{T}A_{x}x}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{A_{u}=QR=[\begin{array}{cc}
+Q_{1} & Q_{2}\end{array}][\begin{array}{cc}
+R_{1} & R_{2}\\
+0 & 0
+\end{array}]}\Pi_{u}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{eqnarray*}
+\mathbf{\Pi_{u}u} & = & \mathbf{[\begin{array}{c}
+u_{s}\\
+u_{p-s}
+\end{array}]}\\
+\mathbf{R_{1}u_{s}+R_{2}u_{p-s}} & = & \mathbf{-Q_{1}^{T}A_{x}x}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\mathbf{R_{u}=\mathbf{R_{1}^{-1}\mathbf{R_{2}=[\begin{array}{c}
+0.3333\\
+0.3333\\
+1
+\end{array}]}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=f(x_{1},x_{2},...,x_{N})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q}{Q}=\frac{x_{1}}{Q}\frac{\partial Q}{\partial x_{1}}(\frac{\delta x_{1}}{x_{1}})+\frac{x_{2}}{Q}\frac{\partial Q}{\partial x_{2}}(\frac{\delta x_{2}}{x_{2}})+......+\frac{x_{N}}{Q}\frac{\partial Q}{\partial x_{N}}(\frac{\partial x_{N}}{x_{N}})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $(\frac{\delta Q}{Q})^{2}=[(\frac{x_{1}}{Q}\frac{\partial Q}{\partial x_{1}})^{2}(\frac{\delta x_{1}}{x_{1}})^{2}+(\frac{x_{2}}{Q}\frac{\partial Q}{\partial x_{2}})^{2}(\frac{\delta x_{2}}{x_{2}})^{2}+...+(\frac{x_{N}}{Q}\frac{\partial Q}{\partial x_{N}})^{2}(\frac{\delta x_{N}}{x_{N}})^{2}]+\sum_{i,j,i\neq j}^{N}\frac{x_{i}}{Q}\frac{\partial Q}{\partial x_{i}}(\frac{\delta x_{i}}{x_{i}})\times\frac{x_{j}}{Q}\frac{\partial Q}{\partial x_{j}}(\frac{\delta x_{j}}{xj})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q}{Q}=[(\frac{x_{1}}{Q}\frac{\partial Q}{\partial x_{1}})^{2}(\frac{\delta x_{1}}{x_{1}})^{2}+(\frac{x_{2}}{Q}\frac{\partial Q}{\partial x_{2}})^{2}(\frac{\delta x_{2}}{x_{2}})^{2}+...+(\frac{x_{N}}{Q}\frac{\partial Q}{\partial x_{N}})^{2}(\frac{\delta x_{N}}{x_{N}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q}{Q}=[(S_{x_{1}})^{2}(U_{x_{1}})^{2}+(S_{x_{2}})^{2}(U_{x_{2}})^{2}+...+(S_{x_{N}})^{2}(U_{x_{N}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $S_{x_{i}}=\frac{x_{i}}{Q}\frac{\partial Q}{\partial x_{i}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $U_{x_{i}}=\frac{\delta x_{i}}{x_{i}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=C_{d}E_{u}Y(\frac{\pi}{4}d^{2})\sqrt{\frac{2\Delta p}{\rho_{1}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Y=\sqrt{(P_{2}/P_{1})^{2/k}(\frac{k}{k-1})(\frac{1-(P_{2}/P_{1})^{\frac{k-1}{k}}}{1-P_{2}/P_{1}})(\frac{1-\beta^{4}}{1-\beta^{4}(P_{2}/P_{1})^{2/k}})}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=K(\frac{\pi}{4}D^{2})\sqrt{\frac{2\Delta p}{\rho}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\beta=\frac{1}{\pi^{2}}[cos^{-1}(1-2\frac{H}{D})-2(1-2\frac{H}{D})\{\frac{H}{D}-(\frac{H}{D})^{2}\}^{1/2}]$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=\frac{f\pi D^{2}w}{4S}(1-\frac{4Kw}{\pi D})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=(\frac{\pi}{4}D^{2})\frac{Krw}{\mathrm{tan}\theta}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=(\frac{\pi}{4}D^{2})\frac{KD}{\mathrm{sin}2\theta}t_{f}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=(\frac{\pi}{4}D^{2})\frac{KE}{BL}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q=\frac{K_{u}\tau(1-(\frac{w}{w_{u}})^{2})}{2KL^{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{corr}\sqrt{\rho_{real}}=Q_{read}\sqrt{\rho_{D}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{corr}=Q_{read}\sqrt{\rho_{D}/\rho_{real}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\overset{\cdot}{m}=Q\cdot\rho$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\overset{\cdot}{m}_{corr}/\sqrt{\rho_{real}}=\overset{\cdot}{m}_{m}/\sqrt{\rho_{D}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\overset{\cdot}{m}_{corr}=\overset{\cdot}{m}_{m}\sqrt{\rho_{real}/\rho_{D}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{std}=Q\cdot\frac{\rho_{1}}{\rho_{1\_std}}\propto\frac{\sqrt{\rho_{1}}}{\rho_{1\_std}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{std\_corr}=Q_{std\_m}\sqrt{\frac{\rho_{m}}{\rho_{D}}}\cdot\frac{\rho_{D\_std}}{\rho_{m\_std}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $PV=nRT$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $PV=nZRT$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{mol}=ZRT/P$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\rho=M_{mol}/V_{mol}=PM_{mol}/ZRT$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{corr}=Q_{m}\sqrt{\frac{M_{mol\_D}P_{D}/Z_{D}T_{D}}{M_{mol\_m}P_{m}/Z_{m}T_{m}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{std}=Q\cdot\frac{\rho_{1}}{\rho_{1\_std}}=Q\cdot\frac{P_{1}/Z_{1}T_{1}}{P_{1\_std}/Z_{1\_std}T_{1\_std}}\propto\frac{1}{\sqrt{P_{1}M_{mol\_1}/Z_{1}T_{1}}}\cdot\frac{P_{1}/Z_{1}T_{1}}{P_{1\_std}/Z_{1\_std}T_{1\_std}}\propto\frac{\sqrt{P_{1}/Z_{1}T_{1}M_{mol\_1}}}{P_{1\_std}/Z_{1\_std}T_{1\_std}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{std\_corr}=Q_{std\_m}\sqrt{\frac{P_{m}/M_{mol\_m}Z_{m}T_{m}}{P_{D}/M_{mol\_D}Z_{D}T_{D}}}=Q_{std\_m}\sqrt{\frac{M_{mol\_D}Z_{D}T_{D}/P_{D}}{M_{mol\_m}Z_{m}T_{m}/P_{m}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\overset{\cdot}{m}_{corr}=\overset{\cdot}{m}_{m}\sqrt{\frac{M_{mol\_m}P_{m}/Z_{m}T_{m}}{M_{mol\_D}P_{D}/Z_{D}T_{D}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Phase
+\backslash
+Type of flowmeters
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Differential pressure meters
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Volumetic flowmeters
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mass flowmeters
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+orifice, venturi, nozzle, wedge, pitot 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+vortex, turbine, ultrasonic, magnetic 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+coriolis
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+liquid, actually, 
+\begin_inset Formula $m^{3}/h$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sqrt{\frac{\rho_{D}}{\rho_{m}}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\rho_{D}}{\rho_{m}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+liquid, standard, 
+\begin_inset Formula $m^{3}/h$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sqrt{\frac{\rho_{m}}{\rho_{D}}}\cdot\frac{\rho_{D\_std}}{\rho_{m\_std}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\rho_{m}}{\rho_{D}}\cdot\frac{\rho_{D\_std}}{\rho_{m\_std}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\rho_{D\_std}}{\rho_{m\_std}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+liquid, actually, 
+\begin_inset Formula $kg/h$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sqrt{\frac{\rho_{m}}{\rho_{D}}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{\rho_{m}}{\rho_{D}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gas, actually, 
+\begin_inset Formula $m^{3}/h$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sqrt{\frac{M_{mol\_D}P_{D}/Z_{D}T_{D}}{M_{mol\_m}P_{m}/Z_{m}T_{m}}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{M_{mol\_D}P_{D}/Z_{D}T_{D}}{M_{mol\_m}P_{m}/Z_{m}T_{m}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gas, standard, 
+\begin_inset Formula $m^{3}/h$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sqrt{\frac{M_{mol\_D}Z_{D}T_{D}/P_{D}}{M_{mol\_m}Z_{m}T_{m}/P_{m}}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{Z_{D}T_{D}/P_{D}}{Z_{m}T_{m}/P_{m}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{M_{mol\_D}}{M_{mol\_m}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+gas, actually, 
+\begin_inset Formula $kg/h$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\sqrt{\frac{M_{mol\_m}P_{m}/Z_{m}T_{m}}{M_{mol\_D}P_{D}/Z_{D}T_{D}}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\frac{M_{mol\_m}P_{m}/Z_{m}T_{m}}{M_{mol\_D}P_{D}/Z_{D}T_{D}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta C_{d}}{C_{d}})^{2}+(\frac{2}{1-\beta^{4}})^{2}(\frac{\delta d}{d})^{2}+(\frac{-2\beta}{1-\beta^{4}})^{2}(\frac{\delta D}{D})^{2}+(\frac{1}{2})^{2}(\frac{\delta\Delta P}{\Delta P})^{2}+(\frac{1}{2})^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q_{std}}{Q_{std}}=[(-1)^{2}(\frac{\delta S}{S})^{2}+(\frac{1-2\frac{4Kw}{\pi D}}{1-\frac{4Kw}{\pi D}})^{2}(\frac{\delta w}{w})^{2}+(\frac{2-\frac{4Kw}{\pi D}}{1-\frac{4Kw}{\pi D}})^{2}(\frac{\delta D}{D})^{2}+(-\frac{\frac{4Kw}{\pi D}}{1-\frac{4Kw}{\pi D}})^{2}(\frac{\delta K}{K})^{2}+(1)^{2}(\frac{\delta f}{f})^{2}+(1)^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta K}{K})^{2}+(1)^{2}(\frac{\delta w}{w})^{2}+(\frac{r_{o}}{2r^{2}})^{2}(\frac{\delta r_{o}}{r_{o}})^{2}+(\frac{r_{i}}{2r^{2}})^{2}(\frac{\delta r_{i}}{r_{i}})^{2}+(-\frac{\theta\mathrm{sec^{2}\theta}}{\mathrm{tan}\theta})^{2}(\frac{\delta\theta}{\theta})^{2}+(2)^{2}(\frac{\delta D}{D})^{2}+(1)^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta K}{K})^{2}+(1)^{2}(\frac{\delta t_{f}}{t_{f}})^{2}+(\frac{-2\theta}{\mathrm{tan}2\theta})^{2}(\frac{\delta\theta}{\theta})^{2}+(3)^{2}(\frac{\delta D}{D})^{2}+(1)^{2}(\frac{\delta\rho_{1}}{\rho_{1}})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{\delta Q_{std}}{Q_{std}}=[(1)^{2}(\frac{\delta K_{u}}{K_{u}})^{2}+(-1)^{2}(\frac{\delta K}{K})^{2}+(-\frac{2w^{2}}{w_{u}^{2}-w^{2}})^{2}(\frac{\delta w}{w})^{2}+(\frac{2w^{2}}{w_{u}^{2}-w^{2}})(\frac{\delta w_{u}}{w_{u}})^{2}+(1)^{2}(\frac{\delta\tau}{\tau})^{2}+(-2)^{2}(\frac{\delta L}{L})^{2}+(-1)^{2}(\frac{\delta\rho_{1\_std}}{\rho_{1\_std}})^{2}]^{\frac{1}{2}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $f\propto x_{i}^{a}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\frac{x_{i}}{f}\frac{\partial f}{\partial x_{i}}=a$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{std}=Q\cdot\frac{\rho_{1}}{\rho_{1\_std}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $Q_{std\_corr}=600\times\sqrt{\frac{740}{750}}\times\frac{950}{960}=589.8std.m^{3}/d\sim590std.m^{3}/d$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\pm0.76\%$
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
