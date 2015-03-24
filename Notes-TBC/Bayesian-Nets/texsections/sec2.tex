@@ -1,0 +1,11 @@
+
+\section*{Lecture 2: Concepts of BN}
+
+\begin{itemize}
+\item To specify a joint probability $P(X_1, X_2, ..., X_n)$, it needs at least $2^n -1$ numbers. Exponential model size.
+\item Chain rule: \[P(X_1, X_2, ..., X_n) = \prod_{i=1}^{n}P(X_i|X_1,...,X_{i-1})\] from this perspective, the number of parameters required for the knowledge of $P(X_1, X_2, ..., X_n)$ is also \[1 + ... + 2^{n-1} = 2^n - 1\] why? \[P(\overline{X_i}|X_1,...,X_{i-1}) = 1 - P(X_i|X_1,...,X_{i-1})\] when $X_i, ..., X_{i-1}$ are fixed, and there are $2^{i-1}$ possible combination of them.
+\item Define $\it{pa}(X_i)$ as the $X_i$ relevant subset $\it{pa}(X_i)\subseteq \{X_1,...,X_{i-1}\}$ such that \[P(X_i|X_1,...,X_{i-1}) = P(X_i|\it{pa}(X_i))\] then \[P(X_1,X_2,...,X_n) = \prod_{i=1}^{n}P(X_i|\it{pa}(X_i))\] in this way the number of parameters might be substantially reduced.
+\item Bayesian network: DAG, each node represents a random variable, and is associated with the conditional probability of the node given its parents, arcs represent direct probabilistic dependence.A BN represents a factorization of a joint distribution. CPT means conditional probability table, multiplying them together gives a joint distribution.
+\item Causal Markov Assumption: a variable is independent of all its non-effects (non-descendants) given its direct causes (i.e. parents).
+\item Causal independence and Context specific independence.
+\end{itemize}

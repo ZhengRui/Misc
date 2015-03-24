@@ -1,0 +1,56 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{picins}
+\usepackage{titling}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning, shapes}
+\input{tikzArrows/arrowsnew}
+\usepackage{array} % vertical align of table cell content
+\usepackage{textcomp}
+\usepackage{pifont} % for dinglist
+
+% Comment the following lines to use the default Computer Modern font
+% instead of the Palatino font provided by the mathpazo package.
+% Remove the 'osf' bit if you don't like the old style figures.
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{ulem}
+
+\geometry{
+ % body={6.5in, 8.5in},
+  left=0.5in,
+  right=0.5in,
+  top=0.5in,
+  bottom=0.8in
+}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+\setlength{\droptitle}{-4em}
+\title{\textbf{Notes: Introduction to Bayesian Networks}}
+\author{Zheng Rui}
+\date{\today}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{8pt}
+
+\begin{document}
+\maketitle
+
+\section*{Lecture 1: Probability}
+
+\input(./texsections/sec2.tex)
+\input(./texsections/sec3.tex)
+\input(./texsections/sec4.tex)
+
+
+
+
+
+
+\end{document}

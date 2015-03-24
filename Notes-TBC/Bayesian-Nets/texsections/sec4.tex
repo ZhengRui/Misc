@@ -1,0 +1,134 @@
+
+\section*{Lecture 4: Inference in BN \& VE Algorithm}
+
+\begin{itemize}
+    \item Diagnostic inference: effects -> causes; Predictive/Causal inference: causes -> effects; Inter-causal inference (explaining away): between causes of a common effect; Mixed inference: combing two or more of the above.
+
+    \item A naive inference algorithm is like:
+        \begin{eqnarray*}
+            P(Q,E) &=& \sum_{X \notin Q \cup E}{P(X)} \\
+            P(E) &=& \sum_{Q}{P(Q,E)} \\
+            P(Q|E=e) &=& \frac{P(Q,E=e)}{P(E=e)}
+        \end{eqnarray*}
+   exponential complexity in this naive way, not making use of factorization
+
+   \item A \textcolor{cyan}{factorization} of a joint distribution is a list of functions whose product is the joint distribution, functions on the list are called factors.
+       \[ P(X_1, X_2, ..., X_n) = \prod_{i=1}^{n}P(X_i|\it{pa}(X_i))\]
+$P(X_i|\it{pa}(X_i))$ are factors.
+
+    \item Elimination a variable $Z_1$ from $P(Z_1,Z_2,...,Z_m)$: suppose $\mathcal{F} = \{f_1, f_2, ..., f_n\}$ is its factorization, and $Z_1$ appears in and only in factors $f_1, f_2, ..., f_k$, then 
+        \[ P(Z_2,...,Z_m) = [\prod_{i=k+1}^{n}f_i] [\sum_{Z_1}\prod_{i=1}^{k}f_i] = [\prod_{i=k+1}^{n}f_i]h \]
+        and its new factorization after Elimination of $Z_1$ is $\{f_{k+1},...,f_n, h\}$ 
+
+    \item Variable Elimination Algorithm: $\textcolor{cyan}{VE}(\mathcal{F}, Q, E, e, \rho)$, with $\mathcal{F}$ factors, $Q$ query variables, $E$ observered variables and $e$ are their observered values, $\rho \notin Q\cup E$ is the ordering of variables to be eliminated, 
+        \begin{itemize}
+            \item[\color{cyan} \ding{182}] While $\rho$ is not empty
+                \begin{itemize}
+                    \item[\color{green} \ding{229}] remove the first variable in $\rho$
+                    \item[\color{green} \ding{229}] call procedure of eliminating a single variable
+                \end{itemize}
+            \item[\color{cyan} \ding{183}] set $h = \prod_{f\in \mathcal{F}} f$, this is the factorization of joint probability $P(Q,E)$ 
+            \item[\color{cyan} \ding{184}] set $E=e$, instantiate $E$ to observered values $e$
+            \item[\color{cyan} \ding{185}] re-normalization $P(Q|E=e) = \frac{h(Q)}{\sum_Q h(Q)}$
+        \end{itemize}
+        a modification is put {\color{cyan} \ding{184}} in front of {\color{cyan} \ding{182}}, this more efficient version was proposed by Zhang and Poole (1994).
+
+        \item Structural graph, moral graph and cost of elimination variables:
+
+\begin{center}
+\begin{tikzpicture}
+    [scale=0.575, every node/.style={transform shape}, wndstyle/.style = {rectangle, draw=blue!50, thick, inner sep=10pt},
+     nodestyle/.style = {circle,draw=blue!50,fill=blue!20,thick,
+                           inner sep=0pt, minimum size=10mm},
+     eqstyle/.style = {latex'new-latex'new, arrowhead=0.5cm, line width=2pt},
+     outstyle/.style = {-latex'new, arrowhead=0.5cm, line width=2pt},
+     textstyle/.style = {midway,align=center,rounded corners,fill=red!10,inner sep=1ex}]
+
+    \node[wndstyle, align=center] (f) at (-5,1) {Factorization(CPTs)\\[5pt] $\mathcal{F} = \{P(A), P(T|A), \cdots , P(D|R,B)\}$};
+    \node[wndstyle, align=center] (B) at (5,1) {Bayesian Network(DAG)\\[5pt]
+        \begin{tikzpicture}[scale=0.8, every node/.style={transform shape}]
+            \node [nodestyle] (a) {$A$};
+            \node [nodestyle, xshift=1.5cm, yshift=-1.5cm] (t) {$T$};
+            \node [nodestyle, right=of t, yshift=0.3cm] (l) {$L$};
+            \node [nodestyle, right=of l, yshift=1.7cm] (s) {$S$};
+            \node [nodestyle, right=of l, xshift=1cm] (b) {$B$};
+            \node [nodestyle, below=of t, xshift=1cm] (r) {$R$};
+            \node [nodestyle, below=of r, xshift=-1cm] (x) {$X$};
+            \node [nodestyle, right=of r, yshift=-1cm] (d) {$D$};
+
+            \draw[outstyle] (a) to (t);
+            \draw[outstyle] (s) to (l);
+            \draw[outstyle] (s) to (b);
+            \draw[outstyle] (t) to (r);
+            \draw[outstyle] (l) to (r);
+            \draw[outstyle] (b) to (d);
+            \draw[outstyle] (r) to (x);
+            \draw[outstyle] (r) to (d);
+        \end{tikzpicture}
+    };
+    \node[below=of B, xshift=-5cm] (g) {
+        \begin{tikzpicture}[scale=0.8, every node/.style={transform shape}]
+            \node [nodestyle] (a) {$A$};
+            \node [nodestyle, xshift=1.5cm, yshift=-1.5cm] (t) {$T$};
+            \node [nodestyle, right=of t, yshift=0.3cm] (l) {$L$};
+            \node [nodestyle, right=of l, yshift=1.7cm] (s) {$S$};
+            \node [nodestyle, right=of l, xshift=1cm] (b) {$B$};
+            \node [nodestyle, below=of t, xshift=1cm] (r) {$R$};
+            \node [nodestyle, below=of r, xshift=-1cm] (x) {$X$};
+            \node [nodestyle, right=of r, yshift=-1cm] (d) {$D$};
+
+            \draw (a) to (t);
+            \draw (s) to (l);
+            \draw (s) to (b);
+            \draw (t) to (r);
+            \draw (t) to (l);
+            \draw (l) to (r);
+            \draw (b) to (d);
+            \draw (r) to (x);
+            \draw (r) to (b);
+            \draw (r) to (d);
+        \end{tikzpicture}
+    };
+    \node[below=of g, yshift=-1cm] (e) {
+        \begin{tikzpicture}[scale=0.8, every node/.style={transform shape}]
+            \node [nodestyle] (a) {$A$};
+            \coordinate [xshift=1.5cm,yshift=-1.5cm)] (t);
+            \node [nodestyle, right=of t, yshift=0.3cm] (l) {$L$};
+            \node [nodestyle, right=of l, yshift=1.7cm] (s) {$S$};
+            \node [nodestyle, right=of l, xshift=1cm] (b) {$B$};
+            \node [nodestyle, below=of t, xshift=1cm] (r) {$R$};
+            \node [nodestyle, below=of r, xshift=-1cm] (x) {$X$};
+            \node [nodestyle, right=of r, yshift=-1cm] (d) {$D$};
+
+            \draw[red!50] (a) to (l);
+            \draw (s) to (l);
+            \draw (s) to (b);
+            \draw[red!50] (a) to (r);
+            \draw (l) to (r);
+            \draw (b) to (d);
+            \draw (r) to (x);
+            \draw (r) to (b);
+            \draw (r) to (d);
+        \end{tikzpicture}
+    };
+
+    \draw[eqstyle] (f) to (B);
+    \draw[outstyle, out=-90, in=180] (f) to node[textstyle,xshift=-1cm,yshift=2cm, text width=6cm] {Structural graph: \textit{For any two variables $X$ and $Y$, connect them iff they appear in the same factor}} (g);
+    \draw[outstyle, out=-90, in=0] (B) to node[textstyle,xshift=1cm,yshift=1cm,text width=5cm]{Moral graph: \textit{Marrying the parents of each node}} (g);
+    \draw[outstyle] (g) to node[textstyle,left,xshift=-2cm,text width=6cm] {Cost of elimination $T$: \[c(T)=w(T)\prod_{X\in \it{adj}(T)}w(X)\], where $w(X)$ is number of possible values of $X$} node[textstyle,right,xshift=2cm,text width=6cm] {factors $P(T|A)$ and $P(R|T,L)$ are replaced with \[\phi(A,L,R)=\sum_T P(T|A)P(R|T,L)\]} (e);
+    \draw[dashed, line width=2pt] (e) ++(0, -3cm) to node[right,xshift=2cm,textstyle,text width=6cm] {
+        \begin{itemize}
+            \item[\ding{43}] Elimination order matters
+            \item[\ding{43}] It's NP-hard to find the optimal elimination order
+            \item[\ding{43}] Two heuristics:
+                \begin{enumerate}
+                    \item[\ding{192}] Maximum cardinality search
+                    \item[\ding{193}] Minimum deficiency search
+                \end{enumerate}
+        \end{itemize}
+    } ++(0,-2cm);
+
+\end{tikzpicture}
+\end{center}
+
+\end{itemize}
