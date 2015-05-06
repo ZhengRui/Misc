@@ -16,4 +16,4 @@ and then call it inside your document body
 ```
     \mygrid[...]
 
-![SkillVisExample](skillsvis.pdf?raw=True)
+![SkillVisExample](skillsvis.png?raw=True)
