@@ -2,7 +2,7 @@
 
 #### Usage: 
 
-you only need to modify the contents inside block 
+you only need to modify the contents inside 
 
 ```
 ----- start ------
@@ -10,10 +10,12 @@ you only need to modify the contents inside block
       ...
 
 ----- end   ------
+```
 
 and then call it inside your document body
 
 ```
     \mygrid[...]
+```
 
 ![SkillVisExample](skillsvis.png?raw=True)
