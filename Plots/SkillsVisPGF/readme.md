@@ -18,4 +18,6 @@ and then call it inside your document body
     \mygrid[...]
 ```
 
+Compiled with XeLatex.
+
 ![SkillVisExample](skillsvis.png?raw=True)
