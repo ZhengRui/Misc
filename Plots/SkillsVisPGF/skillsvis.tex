@@ -1,0 +1,203 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{picins}
+\usepackage{titling}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{tikz}
+\usetikzlibrary{shadows.blur, positioning, decorations.pathreplacing, calc}
+\usepackage{xifthen}
+
+% Comment the following lines to use the default Computer Modern font
+% instead of the Palatino font provided by the mathpazo package.
+% Remove the 'osf' bit if you don't like the old style figures.
+\usepackage[T1]{fontenc}
+\usepackage[sc,osf]{mathpazo}
+\usepackage{ulem}
+
+\geometry{
+ % body={6.5in, 8.5in},
+  left=0.5in,
+  right=0.5in,
+  top=0.5in,
+  bottom=0.8in
+}
+
+% Custom section fonts
+\usepackage{sectsty}
+\sectionfont{\rmfamily\mdseries\Large}
+\subsectionfont{\rmfamily\mdseries\itshape\large}
+\setlength{\droptitle}{-4em}
+\title{\textbf{UNTITLED}}
+\author{Zheng Rui}
+\date{\today}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{8pt}
+
+% Fix warning of Font shape `OMS/pplj/m/n ...'
+\usepackage{textcomp}
+
+
+% Nice customized grid example by Prof Paul Gaborit
+%   http://tex.stackexchange.com/questions/89773/how-can-i-create-new-commands-in-tikz
+
+\pgfkeys{
+  mygrid/.is family,
+  mygrid,
+  min x/.initial=-5,
+  max x/.initial=5,
+  min y/.initial=-5,
+  max y/.initial=5,
+  small step/.initial=.1,
+  step/.initial=1,
+  big step/.initial=5,
+  color/.initial=red,
+}
+\newcommand\mygridset[1]{\pgfkeys{mygrid,#1}}
+\newcommand\mygrid[1][]{
+  \mygridset{#1,
+    min x/.get=\gridminx,
+    max x/.get=\gridmaxx,
+    min y/.get=\gridminy,
+    max y/.get=\gridmaxy,
+    small step/.get=\gridsmallstep,
+    step/.get=\gridstep,
+    big step/.get=\gridbigstep,
+    color/.get=\gridcolor
+  }
+
+%  \draw [step=\gridsmallstep, help lines,\gridcolor!20]
+%  (\gridminx,\gridminy) grid (\gridmaxx,\gridmaxy);
+%  \draw [step=\gridstep, help lines,\gridcolor!40]
+%  (\gridminx,\gridminy) grid (\gridmaxx,\gridmaxy);
+%  \draw [step=\gridbigstep, help lines,\gridcolor!100]
+%  (\gridminx,\gridminy) grid (\gridmaxx,\gridmaxy);
+%  \foreach \x in {\gridminx,...,\gridmaxx} {
+%    \node[below,font=\tiny] at (\x,\gridminy) {$\x$};
+%  };
+%  \foreach \y in {\gridminy,...,\gridmaxy} {
+%    \node[left,font=\tiny] at (\gridminx,\y) {$\y$};
+%    \node[right,font=\tiny] at (\gridmaxx,\y) {$\y$};
+%  };
+
+  \foreach \x in {\gridminx,...,\gridmaxx} {
+    \node[above,font=\tiny] at (\x,\gridmaxy) {$20\pgfmathparse{\x<10?0:{}}\pgfmathresult \x$};
+  };
+  \pgfmathsetmacro{\asmallstepx}{\gridminx+\gridsmallstep}
+  \foreach \x in {\gridminx,\asmallstepx,...,\gridmaxx} {
+    \draw[\gridcolor!20] (\x,\gridminy) -- (\x,\gridmaxy);
+  };
+  \pgfmathsetmacro{\astepx}{\gridminx+\gridstep}
+  \foreach \x in {\gridminx,\astepx,...,\gridmaxx} {
+    \draw[\gridcolor!40] (\x,\gridminy) -- (\x,\gridmaxy);
+  };
+  \pgfmathsetmacro{\abigstepx}{(round(\gridminx/\gridbigstep-0.5) + 2)*\gridbigstep}
+  \pgfmathsetmacro{\headbigstepx}{(round(\gridminx/\gridbigstep-0.5) + 1)*\gridbigstep}
+  \foreach \x in {\headbigstepx,\abigstepx,...,\gridmaxx} {
+    \draw[\gridcolor!100] (\x,\gridminy) -- (\x,\gridmaxy);
+  };
+  \pgfmathsetmacro{\skillsnum}{\gridmaxy-1}
+
+  % Add your skills details here
+  % --------------- start --------------
+
+  % Skill Names
+  \def\skills{{"Cat1Skill1", "Cat1Skill2", "Cat1Skill3", "Cat2Skill1", "Cat2Skill2", "Cat2Skill3", "Cat2Skill4", "Cat3Skill1", "Cat3Skill2", "Cat4Skill1", "Cat4Skill2", "Cat4Skill3"}}
+
+  % Skill Weights (how often/good you use it)
+  \def\weights{{0.5, 1, 1, 0.8, 0.6, 0.9, 1, 0.3, 0.7, 1.0, 0.4, 1.0}}
+
+  % Skill periods, 6 means 2006, 15 means 2015 etc., \gridminx and \gridmax is the 'min x' and 'max x' in the \mygrid[] call inside document body
+  \def\periodsStart{{\gridminx, 6, 13, 3, 2, 10, 9, 12, 12, 6, 11, 12, 13}}
+  \def\periodsEnd{{11, \gridmaxx, \gridmaxx, 9, \gridmaxx, \gridmaxx, \gridmaxx, \gridmaxx, \gridmaxx, \gridmaxx, 14, \gridmaxx}}
+
+  % Categories, specify which category each skill belongs to, should start from 0
+  \def\categorys{{0, 0, 0, 1, 1, 1, 1, 2, 2, 2, 3, 3}}
+
+  % Category names
+  \def\catename{{"Category1", "Category2", "Category3", "Category4"}}
+
+  % Category color/style
+  \def\catecolors{{"purple", "green!10!black", "red", "blue"}}
+
+  % --------------- end --------------
+
+
+  \tikzfading[name=fade up,
+              top color=transparent!100, 
+              bottom color=transparent!50]
+  \tikzfading[name=fade left,
+              left color=transparent!90, 
+              right color=transparent!0]
+  \pgfmathparse{\categorys[0]}
+  \let\precateid\pgfmathresult
+  \let\precatepos\gridminy
+  \foreach \y in {\gridminy,...,\skillsnum} {
+    \pgfmathparse{0.2+0.8*\weights[\y]}
+    \let\opa\pgfmathresult
+    \pgfmathparse{\categorys[\y]}
+    \let\cateid\pgfmathresult
+    \pgfmathparse{\catecolors[\cateid]}
+    \let\skillcolor\pgfmathresult
+    \pgfmathparse{\periodsStart[\y]}
+    \let\skillstart\pgfmathresult
+    \pgfmathparse{\periodsEnd[\y]}
+    \let\skillend\pgfmathresult
+
+    \draw[\gridcolor!40, shift={(0,0.5)}, densely dotted] (\gridminx, \skillsnum-\y) node[left, font=\tiny, text=\skillcolor] {\pgfmathparse{\skills[\y]}\pgfmathresult} -- (\gridmaxx, \skillsnum-\y);
+
+    \shade [inner color=\skillcolor, outer color=\skillcolor!80!gray, opacity=\opa, shift={(0,0.5)}, rounded corners=3pt, drop shadow={fill=\skillcolor, shadow xshift=0.1ex, shadow yshift=-0.3ex, path fading=fade up}] (\skillstart, \skillsnum-\y-0.25) rectangle (\skillend, \skillsnum-\y+0.25); 
+
+    \ifthenelse{\NOT \cateid = \precateid}{
+        \pgfmathparse{\catename[\precateid]}
+        \let\precatename\pgfmathresult
+        \pgfmathparse{\catecolors[\precateid]}
+        \let\preskillcolor\pgfmathresult
+        \draw [decorate, decoration={brace,amplitude=6pt,raise=4pt}, shift={(0,0.5)}, \preskillcolor] (\gridmaxx,\skillsnum-\precatepos) -- (\gridmaxx,\skillsnum-\y+1) node [\preskillcolor,midway,xshift=0.6cm,rotate=-90] {\tiny \precatename};
+        \xdef\precateid{\cateid}
+        \xdef\precatepos{\y}
+    }{};
+
+    \ifthenelse{\y = \skillsnum}{
+        \pgfmathparse{\catename[\precateid]}
+        \let\precatename\pgfmathresult
+        \draw [decorate, decoration={brace,amplitude=6pt,raise=4pt}, shift={(0,0.5)}, \skillcolor] (\gridmaxx,\skillsnum-\precatepos) -- (\gridmaxx,\skillsnum-\y) node [\skillcolor,midway,xshift=0.6cm,rotate=-90] {\tiny \precatename};
+    }{};
+  };
+
+  \fill [color=green!10!black, path fading=fade left, rounded corners=3pt, shift={(3,0.0)}] (\gridminx, \gridminy-1.25) rectangle (\gridminx+5, \gridminy-0.75);
+  \node[color=green!10!black, shift={(9,0)}] at (\gridminx, \gridminy-1) {\tiny Heavy Usage};
+  \node[color=green!10!black, shift={(2,0)}] at (\gridminx, \gridminy-1) {\tiny Light Usage};
+}
+
+% a style to memorize some change to the default values
+\mygridset{
+  a grid/.style={
+    min x=-3,
+    max x=3,
+    min y=-3,
+    max y=3,
+    small step=.2,
+    step=1,
+    big step=2,
+    color=orange,
+  }
+}
+
+
+\begin{document}
+%\maketitle
+
+\begin{tikzpicture}[yscale=0.7]
+    % you need to specify a grid with correct values
+    % min x and max x signify years, min y = 0, max y is the total number of your skills defined in the preamble (12 in this example)
+
+    \mygrid[min x=2, max x=15.4, min y=0, max y=12, small step=.25, big step=5, color=orange]
+
+\end{tikzpicture}
+
+
+
+\end{document}
